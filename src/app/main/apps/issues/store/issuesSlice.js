@@ -6,7 +6,7 @@ export const getIssues = createAsyncThunk('issuesApp/issues/getIssues', async (r
   const response = await axios.get('https://cargofleet-api.fly.dev/team1/api/vehicles/538/issues', {
     params: routeParams,
     headers: {
-      Authorization: 'Zb84MzAROCrhmF6t'
+      Authorization: "Zb84MzAROCrhmF6t"
     }
   });
 
@@ -27,7 +27,10 @@ export const addContact = createAsyncThunk('issuesApp/issues/addContact', async 
 export const updateContact = createAsyncThunk(
   'contactsApp/contacts/updateContact',
   async (contact, { dispatch, getState }) => {
-    const response = await axios.put(`https://cargofleet-api.fly.dev/team1/api/vehicles/538/issues/${contact.id}`, contact);
+    const response = await axios.put(`
+    https://cargofleet-api.fly.dev/team1/api/vehicles/538/issues/${contact.id}`,
+      contact
+    );
     const data = await response.data;
 
     dispatch(getIssues());
