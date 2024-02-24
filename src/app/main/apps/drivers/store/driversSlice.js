@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import axios from 'axios';
-// import { getUserData } from './userSlice';
+import { getUserData } from './userSlice';
 
 export const getDrivers = createAsyncThunk('drivers-list-app/drivers/getDrivers', async (routeParams, { getState }) => {
   routeParams = routeParams || getState().driversApp.drivers.routeParams;
   const response = await axios.get('https://cargofleet-api.fly.dev/team1/api/drivers', {
     params: routeParams,
     headers: {
-      Authorization: "Zb84MzAROCrhmF6t"
+      Authorization: 'Zb84MzAROCrhmF6t'
     }
   });
   const data = await response.data.data;
