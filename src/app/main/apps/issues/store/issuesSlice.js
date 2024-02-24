@@ -6,7 +6,7 @@ export const getIssues = createAsyncThunk('issuesApp/issues/getIssues', async (r
   const response = await axios.get('https://cargofleet-api.fly.dev/team1/api/vehicles/538/issues', {
     params: routeParams,
     headers: {
-      Authorization: "Zb84MzAROCrhmF6t"
+      Authorization: 'Zb84MzAROCrhmF6t'
     }
   });
 

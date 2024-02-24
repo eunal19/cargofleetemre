@@ -7,7 +7,7 @@ export const getDrivers = createAsyncThunk('drivers-list-app/drivers/getDrivers'
   const response = await axios.get('https://cargofleet-api.fly.dev/team1/api/drivers', {
     params: routeParams,
     headers: {
-      Authorization: "Zb84MzAROCrhmF6t"
+      Authorization: 'Zb84MzAROCrhmF6t'
     }
   });
   const data = await response.data.data;
