@@ -4,15 +4,18 @@ import axios from 'axios';
 
 export const getDrivers = createAsyncThunk('drivers-list-app/drivers/getDrivers', async (routeParams, { getState }) => {
   routeParams = routeParams || getState().driversApp.drivers.routeParams;
-  const response = await axios.get('https://mysite-h17z.onrender.com/team1/api/drivers', {
-    params: routeParams
+  const response = await axios.get('https://cargofleet-api.fly.dev/team1/api/drivers', {
+    params: routeParams,
+    headers: {
+      Authorization: "Zb84MzAROCrhmF6t"
+    }
   });
   const data = await response.data.data;
   return { data, routeParams };
 });
 
 export const addDriver = createAsyncThunk('driversApp/drivers/addDriver', async (driver, { dispatch, getState }) => {
-  const response = await axios.post(`https://mysite-h17z.onrender.com/team1/api/drivers`, driver);
+  const response = await axios.post(`https://cargofleet-api.fly.dev/team1/api/drivers`, driver);
   const data = await response.data;
 
   dispatch(getDrivers());
@@ -23,7 +26,7 @@ export const addDriver = createAsyncThunk('driversApp/drivers/addDriver', async 
 export const updateDriver = createAsyncThunk(
   'driversApp/drivers/updateDriver',
   async (driver, { dispatch, getState }) => {
-    const response = await axios.put(`https://mysite-h17z.onrender.com/team1/api/drivers/${driver.id}`, driver);
+    const response = await axios.put(`https://cargofleet-api.fly.dev/team1/api/drivers/${driver.id}`, driver);
     const data = await response.data;
 
     dispatch(getDrivers());
@@ -35,7 +38,7 @@ export const updateDriver = createAsyncThunk(
 export const removeDriver = createAsyncThunk(
   'driversApp/drivers/removeDriver',
   async (driverId, { dispatch, getState }) => {
-    await axios.delete(`https://mysite-h17z.onrender.com/team1/api/drivers/${driverId}`);
+    await axios.delete(`https://cargofleet-api.fly.dev/team1/api/drivers/${driverId}`);
 
     return driverId;
   }

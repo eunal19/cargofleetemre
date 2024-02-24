@@ -3,8 +3,11 @@ import axios from 'axios';
 
 export const getIssues = createAsyncThunk('issuesApp/issues/getIssues', async (routeParams, { getState }) => {
   routeParams = routeParams || getState().contactsApp.contacts.routeParams;
-  const response = await axios.get('https://mysite-h17z.onrender.com/team1/api/issues', {
-    params: routeParams
+  const response = await axios.get('https://cargofleet-api.fly.dev/team1/api/vehicles/538/issues', {
+    params: routeParams,
+    headers: {
+      Authorization: "Zb84MzAROCrhmF6t"
+    }
   });
 
   const data = await response.data.data;
@@ -13,7 +16,7 @@ export const getIssues = createAsyncThunk('issuesApp/issues/getIssues', async (r
 });
 
 export const addContact = createAsyncThunk('issuesApp/issues/addContact', async (issue, { dispatch, getState }) => {
-  const response = await axios.post('https://mysite-h17z.onrender.com/team1/api/issues', issue);
+  const response = await axios.post('https://cargofleet-api.fly.dev/team1/api/vehicles/538/issues', issue);
   const data = await response.data;
 
   dispatch(getIssues());
@@ -24,7 +27,7 @@ export const addContact = createAsyncThunk('issuesApp/issues/addContact', async 
 export const updateContact = createAsyncThunk(
   'contactsApp/contacts/updateContact',
   async (contact, { dispatch, getState }) => {
-    const response = await axios.put(`https://mysite-h17z.onrender.com/team1/api/issues/${contact.id}`, contact);
+    const response = await axios.put(`https://cargofleet-api.fly.dev/team1/api/vehicles/538/issues/${contact.id}`, contact);
     const data = await response.data;
 
     dispatch(getIssues());
@@ -36,7 +39,7 @@ export const updateContact = createAsyncThunk(
 export const removeContact = createAsyncThunk(
   'contactsApp/contacts/removeContact',
   async (contactId, { dispatch, getState }) => {
-    await axios.delete(`https://mysite-h17z.onrender.com/team1/api/issues/${contactId}`);
+    await axios.delete(`https://cargofleet-api.fly.dev/team1/api/vehicles/538/issues/${contactId}`);
 
     return contactId;
   }
