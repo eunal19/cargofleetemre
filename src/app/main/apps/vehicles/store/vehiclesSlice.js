@@ -3,8 +3,11 @@ import axios from 'axios';
 
 export const getIssues = createAsyncThunk('issuesApp/issues/getIssues', async (routeParams, { getState }) => {
   routeParams = routeParams || getState().contactsApp.contacts.routeParams;
-  const response = await axios.get('https://mysite-h17z.onrender.com/team1/api/vehicles', {
-    params: routeParams
+  const response = await axios.get('https://cargofleet-api.fly.dev/team1/api/vehicles', {
+    params: routeParams,
+    headers: {
+      Authorization: "Zb84MzAROCrhmF6t"
+    }
   });
   const data = await response.data.data;
 
@@ -14,7 +17,7 @@ export const getIssues = createAsyncThunk('issuesApp/issues/getIssues', async (r
 export const addContact = createAsyncThunk(
   'vehiclesApp/vehicles/addContact',
   async (vehicle, { dispatch, getState }) => {
-    const response = await axios.post('https://mysite-h17z.onrender.com/team1/api/vehicles', vehicle);
+    const response = await axios.post('https://cargofleet-api.fly.dev/team1/api/vehicles', vehicle);
     const data = await response.data;
     console.log('ADD VEHICLE 12 OCTOBER', vehicle);
 
@@ -27,7 +30,7 @@ export const addContact = createAsyncThunk(
 export const updateContact = createAsyncThunk(
   'contactsApp/contacts/updateContact',
   async (contact, { dispatch, getState }) => {
-    const response = await axios.put(`https://mysite-h17z.onrender.com/team1/api/vehicles/${contact.id}`, contact);
+    const response = await axios.put(`https://cargofleet-api.fly.dev/team1/api/vehicles/${contact.id}`, contact);
     const data = await response.data;
 
     dispatch(getIssues());
@@ -41,7 +44,7 @@ export const assignContact = createAsyncThunk(
   async (contact, { dispatch, getState }) => {
     console.log('HERE I AM INSIDE ASSIGN', contact);
     const response = await axios.post(
-      `https://mysite-h17z.onrender.com/team1/api/vehicles/${contact.id}/assign`,
+      `https://cargofleet-api.fly.dev/team1/api/vehicles/${contact.id}/assign`,
       contact
     );
     const data = await response.data;
@@ -58,7 +61,7 @@ export const unAssignContact = createAsyncThunk(
     console.log('HERE I AM INSIDE UN-ASSIGN', contact);
     const newContact = { ...contact, assignment_id: contact.active_assignment.id };
     const response = await axios.post(
-      `https://mysite-h17z.onrender.com/team1/api/vehicles/${contact.id}/unassign`,
+      `https://cargofleet-api.fly.dev/team1/api/vehicles/${contact.id}/unassign`,
       newContact
     );
     const data = await response.data;
@@ -72,7 +75,7 @@ export const unAssignContact = createAsyncThunk(
 export const removeContact = createAsyncThunk(
   'contactsApp/contacts/removeContact',
   async (contactId, { dispatch, getState }) => {
-    await axios.delete(`https://mysite-h17z.onrender.com/team1/api/vehicles/${contactId}`);
+    await axios.delete(`https://cargofleet-api.fly.dev/team1/api/vehicles/${contactId}`);
 
     return contactId;
   }
